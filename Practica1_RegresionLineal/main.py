@@ -69,6 +69,8 @@ def Experimento1():
         y_train, y_test = Crear_Entrenamiento_Prueba(y)
         y_train = np.reshape(y_train, y_train.shape[0])
         y_test = np.reshape(y_test, y_test.shape[0])
+        print("X_train_shape = ", X_train.shape)
+        print("y_train_shape = ", y_train.shape)
         W_n = Ecuacion_Normal(X_train, y_train)
         cost_train = Calcular_Costo(X_train, y_train, W_n)
         cost_test = Calcular_Costo(X_test, y_test, W_n)
@@ -130,7 +132,7 @@ def Experimento2():
                 W, costs = Gradiente_Descendiente(X_train, y_train, W, num_iter, learn_rate)
                 cost_train = Calcular_Costo(X_train, y_train, W)
                 cost_test = Calcular_Costo(X_test, y_test, W)
-                learn_rate_row.append(cost_test)
+                learn_rate_row.append("%.4f" % cost_test)
                 print("Archivo: ", name_data_file)
                 print("num_iter = ", num_iter)
                 print("learn_rate = ", learn_rate)
@@ -185,6 +187,8 @@ def Experimento3():
     learn_rate = 0.1
     W, costs = Gradiente_Descendiente(X_train, y_train, W, num_iter, learn_rate)
     print("Pesos de Gradiente Descendiente:\n", W)
+    cost_test = Calcular_Costo(X_test, y_test, W)
+    print("Costo de prueba: ", cost_test, "\n")
 
     plt.subplot(2, 1, 1)
     plt.plot(original_X_train.reshape(original_X_train.shape[0]), original_y_train.reshape(original_y_train.shape[0]), 'ro')
@@ -195,6 +199,8 @@ def Experimento3():
 
     W_n = Ecuacion_Normal(X_train, y_train)
     print("Pesos de Ecuacion normal:\n", W_n)
+    cost_test = Calcular_Costo(X_test, y_test, W_n)
+    print("Costo de prueba: ", cost_test, "\n")
     t = ((W_n[0] * s_n + W_n[1]) * standard_dev) + mean_data
     plt.subplot(2, 1, 2)
     plt.plot(original_X_train.reshape(original_X_train.shape[0]), original_y_train.reshape(original_y_train.shape[0]), 'ro')
